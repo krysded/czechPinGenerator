@@ -10,7 +10,9 @@
     function getRandomThreeDigits(){
         return "" + randomNumber(0, 10) + randomNumber(0, 10) + randomNumber(0, 10)
     }
-    function getRandomDate(){
+    function getRandomDate(minAge, maxAge){
+	    let birthDate = new Date()
+	    birthDate.setFullYear((birthDate.getFullYear() - randomNumber(minAge, maxAge)), randomNumber(, max))
         return "" + randomNumber(50, 100) + randomMonth() + randomNumber(1, 28) 
     }
   function generatePIN(){ 
