@@ -1,5 +1,5 @@
     function randomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min) ) + min;
+        return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
     function randomFifty(){
         return Math.round(Math.random()) * 50
@@ -8,11 +8,18 @@
         return randomNumber(1, 13) + randomFifty()
     }
     function getRandomThreeDigits(){
-        return "" + randomNumber(0, 10) + randomNumber(0, 10) + randomNumber(0, 10)
+        return "" + randomNumber(0, 9) + randomNumber(0, 9) + randomNumber(0, 9)
     }
     function getRandomDate(minAge, maxAge){
 	    let birthDate = new Date()
-	    birthDate.setFullYear((birthDate.getFullYear() - randomNumber(minAge, maxAge)), randomNumber(, max))
+	    let rndYear = randomNumber(minAge, maxAge)
+	    if (rndYear == minAge){
+		    birthDate.setFullYear(birthDate.getFullYear() - rndYear, randomNumber(0, birthDate.getMonth()), randomNumber(0, birthDate.getDay()))
+	    } else if (rndYear == maxAge){
+		    birthDate.setFullYear(birthDate.getFullYear() - rndYear, randomNumber(birthDate.getMonth(), 11), randomNumber(birthDate.getDay(), 31))
+	    } else {
+		    birthDate.setFullYear(birthDate.getFullYear() - rndYear, randomNumber(0, 11), randomNumber(0, 31))
+	    }
         return "" + randomNumber(50, 100) + randomMonth() + randomNumber(1, 28) 
     }
   function generatePIN(){ 
