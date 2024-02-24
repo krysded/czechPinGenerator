@@ -12,13 +12,22 @@ function getRandomDate(minAge, maxAge){
 	let rndYear = randomNumber((minAge *  31556952000), (maxAge * 31556952000 ))
 	return rndYear = birthDate.getTime() - rndYear
 }
-function getPinDate(minAge, maxAge){
-	let rndDate = getRandomDate(minAge, maxAge). 
+function getRndPinDate(minAge, maxAge){
+	let rndDate = getRandomDate(minAge, maxAge) 
+	let rndPinDate = new Date(rndDate)
+	let rndPinYear = rndPinDate.getUTCFullYear().toString().slice(-2)
+	let rndPinMonth = rndPinDate.getUTCMonth() + 1 + randomFifty() 
+	rndPinMonth = rndPinMonth.toString().padStart(2, "0")
+	let rndPinDay = rndPinDate.getUTCDay() + 1
+	rndPinDay = rndPinDay.toString().padStart(2, "0")
+	return "" + rndPinYear + rndPinMonth + rndPinDay
+	
 }
-function generatePIN(){ 
-	let pin = "" + getRandomDate() + getRandomThreeDigits()
+function generatePIN(minAge, maxAge){ 
+	let pin = "" + getRndPinDate(minAge, maxAge) + getRandomThreeDigits()
 	let lastDigit = pin % 11
+	if (lastDigit == 10){
+		return "" + (Number(pin) + 1) + "0" 
+	}
 	return "" + pin + lastDigit
 }
-
-console.log(getRandomDate(18, 25));
