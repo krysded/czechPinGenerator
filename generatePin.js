@@ -24,10 +24,14 @@ function getRndPinDate(minAge, maxAge){
 	
 }
 function generatePIN(minAge, maxAge){ 
-	let pin = "" + getRndPinDate(minAge, maxAge) + getRandomThreeDigits()
+	let rndPinDate = getRndPinDate(minAge, maxAge)
+	let pin = "" + rndPinDate + getRandomThreeDigits()
+	if (parseInt(rndPinDate.slice(2)) < 54){
+		return pin
+	}
 	let lastDigit = pin % 11
 	if (lastDigit == 10){
-		return "" + (Number(pin) + 1) + "0" 
+		return "" + pin + "0" 
 	}
 	return "" + pin + lastDigit
 }
